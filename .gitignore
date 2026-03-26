@@ -1,0 +1,54 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Build
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+
+# Logs
+logs/
+*.log
+log.txt
+
+# Environment
+.env
+.env.local
+*.properties.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Node (if using npm/webpack)
+node_modules/
+npm-debug.log
+
+# Misc
+*.tmp
+*.bak
+.gradle/

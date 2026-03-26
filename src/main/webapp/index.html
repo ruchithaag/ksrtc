@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking - Online Bus Tickets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .search-container {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .search-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .features {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            margin: 15px 0;
+            color: #667eea;
+        }
+        
+        .buses-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        .buses-section h2 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .bus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .bus-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+        
+        .bus-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .bus-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .bus-details {
+            padding: 20px;
+        }
+        
+        .bus-details h4 {
+            margin-bottom: 10px;
+        }
+        
+        .bus-route {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .bus-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .book-btn {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .book-btn:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: #bbb;
+            text-decoration: none;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .search-container {
+                margin-top: -20px;
+            }
+            
+            nav a {
+                margin: 0 8px;
+                font-size: 12px;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">🚌 BusBook</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#buses">Buses</a>
+                <a href="#offers">Offers</a>
+                <a href="#contact">Contact</a>
+                <a href="#login">Login</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>Book Your Bus Tickets Online</h1>
+        <p>Fast, Safe & Comfortable Journey</p>
+    </section>
+    
+    <div class="search-container">
+        <form class="search-form">
+            <div class="form-group">
+                <label>From</label>
+                <input type="text" placeholder="Departure city">
+            </div>
+            <div class="form-group">
+                <label>To</label>
+                <input type="text" placeholder="Arrival city">
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date">
+            </div>
+            <div class="form-group">
+                <label>Passengers</label>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4+</option>
+                </select>
+            </div>
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+    
+    <section class="features">
+        <div class="feature-card">
+            <div style="font-size: 40px;">✓</div>
+            <h3>Best Prices</h3>
+            <p>Compare and book the most affordable tickets</p>
+        </div>
+        <div class="feature-card">
+            <div style="font-size: 40px;">📱</div>
+            <h3>Easy Booking</h3>
+            <p>Simple and fast booking process</p>
+        </div>
+        <div class="feature-card">
+            <div style="font-size: 40px;">🛡️</div>
+            <h3>Safe Travel</h3>
+            <p>Secure payment and verified buses</p>
+        </div>
+    </section>
+    
+    <section class="buses-section" id="buses">
+        <h2>Featured Buses</h2>
+        <div class="bus-grid">
+            <div class="bus-card">
+                <div class="bus-image">Premium AC Bus</div>
+                <div class="bus-details">
+                    <h4>Luxury Express</h4>
+                    <div class="bus-route">
+                        <span>08:00 AM</span>
+                        <span>→</span>
+                        <span>02:00 PM</span>
+                    </div>
+                    <div class="bus-route">
+                        <span>City A</span>
+                        <span>City B</span>
+                    </div>
+                    <div class="bus-price">₹450</div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+            
+            <div class="bus-card">
+                <div class="bus-image">Semi Sleeper</div>
+                <div class="bus-details">
+                    <h4>Evening Journey</h4>
+                    <div class="bus-route">
+                        <span>06:00 PM</span>
+                        <span>→</span>
+                        <span>12:00 AM</span>
+                    </div>
+                    <div class="bus-route">
+                        <span>City A</span>
+                        <span>City C</span>
+                    </div>
+                    <div class="bus-price">₹550</div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+            
+            <div class="bus-card">
+                <div class="bus-image">Sleeper AC</div>
+                <div class="bus-details">
+                    <h4>Night Comfort</h4>
+                    <div class="bus-route">
+                        <span>10:00 PM</span>
+                        <span>→</span>
+                        <span>06:00 AM</span>
+                    </div>
+                    <div class="bus-route">
+                        <span>City B</span>
+                        <span>City D</span>
+                    </div>
+                    <div class="bus-price">₹750</div>
+                    <button class="book-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <a href="#">Company Info</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
